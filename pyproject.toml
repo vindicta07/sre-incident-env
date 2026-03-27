@@ -26,6 +26,7 @@ dependencies = [
     "uvicorn[standard]>=0.27.0",
     "pydantic>=2.5.0",
     "httpx>=0.26.0",
+    "openenv-core>=0.1.0",
 ]
 
 [project.optional-dependencies]
@@ -38,15 +39,15 @@ dev = [
 ]
 
 [project.scripts]
-server = "api.main:run_server"
-sre-env = "api.main:run_server"
+server = "server.app:main"
+sre-env = "server.app:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["environment", "graders", "api", "baseline"]
+packages = ["environment", "graders", "api", "baseline", "server"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
