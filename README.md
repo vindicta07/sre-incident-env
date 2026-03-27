@@ -1,8 +1,8 @@
 ---
 title: SRE Incident Environment
-emoji: ??
+emoji: 🚨
 colorFrom: red
-colorTo: orange
+colorTo: pink
 sdk: docker
 pinned: false
 license: mit
