@@ -15,13 +15,12 @@ client = TestClient(app)
 class TestRootEndpoint:
     """Tests for root endpoint"""
 
-    def test_root_returns_info(self):
-        """Root endpoint should return API info"""
+    def test_root_serves_redoc(self):
+        """Root endpoint should serve ReDoc HTML"""
         response = client.get("/")
         assert response.status_code == 200
-        data = response.json()
-        assert data["name"] == "SRE Incident Environment"
-        assert "endpoints" in data
+        assert "text/html" in response.headers.get("content-type", "")
+        assert "ReDoc" in response.text
 
     def test_health_check(self):
         """Health check should return healthy"""

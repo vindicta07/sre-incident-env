@@ -31,6 +31,8 @@ def create_app() -> FastAPI:
         ),
         version="1.0.0",
         lifespan=lifespan,
+        docs_url=None,      # Disable Swagger UI
+        redoc_url="/",    # Serve ReDoc at root
     )
 
     # Add CORS middleware for HuggingFace Spaces
@@ -48,22 +50,7 @@ def create_app() -> FastAPI:
     app.include_router(grader_routes.router, tags=["Grader"])
     app.include_router(baseline_routes.router, tags=["Baseline"])
 
-    @app.get("/", tags=["Root"])
-    async def root():
-        """Root endpoint with API information"""
-        return {
-            "name": "SRE Incident Environment",
-            "version": "1.0.0",
-            "description": "Train AI agents to diagnose and resolve production incidents",
-            "endpoints": {
-                "POST /reset": "Start new episode",
-                "POST /step": "Take an action",
-                "GET /state": "Get current state",
-                "GET /tasks": "List available tasks",
-                "POST /grader": "Grade an episode",
-                "POST /baseline": "Run baseline agent",
-            },
-        }
+    # Root endpoint removed; ReDoc will be served at '/'
 
     @app.get("/health", tags=["Health"])
     async def health():
