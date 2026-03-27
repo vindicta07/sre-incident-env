@@ -1,0 +1,80 @@
+# OpenEnv Metadata Specification
+name: SREIncidentEnv
+version: 1.0.0
+description: Train AI agents to diagnose and resolve production incidents like an SRE
+
+# Tags for discoverability
+tags:
+  - openenv
+  - sre
+  - devops
+  - incident-response
+  - real-world
+  - production
+  - microservices
+
+# Environment characteristics
+action_type: discrete+structured
+observation_type: structured_text
+reward_type: dense
+episode_length: 20
+
+# Available tasks
+tasks:
+  - id: task_1_single_service_crash
+    name: Single Service Crash
+    difficulty: easy
+    description: One microservice is down due to a bad deploy. Identify and rollback.
+
+  - id: task_2_db_cascade_failure
+    name: Database Cascade Failure
+    difficulty: medium
+    description: Database under extreme load causing cascading failures. Kill queries and disable feature flag.
+
+  - id: task_3_distributed_ghost_incident
+    name: Distributed Ghost Incident
+    difficulty: hard
+    description: Intermittent 5xx errors from retry storm. Fix nginx config and reset circuit breakers.
+
+# Baseline scores (achieved with Mixtral-8x7B)
+baseline_scores:
+  task_1_single_service_crash: 0.82
+  task_2_db_cascade_failure: 0.61
+  task_3_distributed_ghost_incident: 0.38
+  average: 0.60
+
+# API endpoints
+api:
+  base_path: /
+  endpoints:
+    - method: POST
+      path: /reset
+      description: Start new episode
+
+    - method: POST
+      path: /step
+      description: Take an action
+
+    - method: GET
+      path: /state
+      description: Get current state
+
+    - method: GET
+      path: /tasks
+      description: List available tasks
+
+    - method: POST
+      path: /grader
+      description: Grade an episode
+
+    - method: POST
+      path: /baseline
+      description: Run baseline agent
+
+# Author information
+author:
+  name: SRE Incident Environment Team
+  hackathon: Meta x Scaler OpenEnv Hackathon - Round 1
+
+# License
+license: MIT

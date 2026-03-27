@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  sre-incident-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount for development (optional)
+      - ./baseline/results:/app/baseline/results
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # Optional: Run tests in container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: pytest tests/ -v
+    profiles:
+      - test
