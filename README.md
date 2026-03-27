@@ -18,6 +18,10 @@ tags:
 
 SRE Incident Environment is a FastAPI-based simulation environment for training and evaluating agents on production incident response. It exposes realistic operational signals, accepts structured remediation actions and returns deterministic grades so different agent strategies can be compared reliably.
 
+Live deployment: [Hugging Face Space](https://vindicta07-sre-incident-env.hf.space/)
+
+Source code: [GitHub Repository](https://github.com/vindicta07/sre-incident-env)
+
 ## Overview
 
 The project models production outages that an SRE might face in a real system. Each task starts with an incident state containing alerts, metrics, logs, recent deploys and service dependencies. An agent interacts with the environment by choosing actions such as checking logs, rolling back a deploy, killing slow queries or reverting a bad config change.
@@ -112,6 +116,11 @@ After deployment:
 - `/` serves ReDoc
 - `/health` should return a healthy response
 - `/baseline/status` should report whether the baseline is ready
+
+Deployed Space:
+
+- App URL: [https://vindicta07-sre-incident-env.hf.space/](https://vindicta07-sre-incident-env.hf.space/)
+- Space page: [https://huggingface.co/spaces/vindicta07/sre-incident-env](https://huggingface.co/spaces/vindicta07/sre-incident-env)
 
 ## Baseline Agent
 
